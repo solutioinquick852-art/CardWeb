@@ -1,0 +1,51 @@
+# Render Blueprint for Card Inventory Website
+# This file defines the infrastructure for deploying to Render.
+
+version: "1"
+services:
+  - type: web
+    name: card-inventory
+    runtime: docker
+    dockerfile: Dockerfile.render
+    dockerContext: .
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: card-inventory-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: card-inventory-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: card-inventory-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: card-inventory-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: card-inventory-db
+          property: password
+      - key: STATIC_KEY
+        value: admin1
+      - key: NODE_ENV
+        value: production
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=384
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: PORT
+        value: "3000"
+    healthCheckPath: /api/health
+    autoDeploy: true
+    plan: free
+
+databases:
+  - name: card-inventory-db
+    databaseName: card_inventory
+    user: admin
+    plan: free
+    ipAllowList: []  # Allow access only from Render services

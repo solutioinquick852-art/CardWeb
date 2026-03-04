@@ -1,0 +1,58 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Environment variables（Render 會自動注入）
+.env
+.env.local
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+Dockerfile.*
+.dockerignore
+docker-compose.yml
+
+# Documentation
+README.md
+DEPLOYMENT_INFO.md
+RENDER_DEPLOYMENT.md
+GITHUB_SETUP.md
+QUICKSTART.md
+QUICK_GUIDE.md
+*.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Test coverage
+coverage
+.nyc_output
+
+# Build artifacts
+build
+dist
+
+# Other
+.editorconfig
+.eslintrc*
+.prettierrc*
+
+# Public（我們會複製整個目錄，但這個可以忽略）
+# public/

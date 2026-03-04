@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: card-inventory-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: card_inventory
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - card-network
+
+  backend:
+    build: ./backend
+    container_name: card-inventory-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: card_inventory
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      PORT: 3000
+      STATIC_KEY: ${STATIC_KEY:-admin1}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - card-network
+
+  frontend:
+    build: ./frontend
+    container_name: card-inventory-frontend
+    environment:
+      REACT_APP_API_URL: http://localhost:3000
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    networks:
+      - card-network
+
+volumes:
+  postgres_data:
+
+networks:
+  card-network:
+    driver: bridge
