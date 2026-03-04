@@ -89,15 +89,9 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON admins TO postgres;
 
 -- 使用方法：
 --
--- 方法 1: 直接執行
+-- 直接執行
 -- psql -U postgres -d card_inventory -f init.sql
---
--- 方法 2: 在 Render 的 PostgreSQL 連接中執行
--- 1. 打開 Render Dashboard
--- 2. 找到你的 PostgreSQL 服務
--- 3. 點擊 "Query" 或 "psql shell"
--- 4. 複製上面的 SQL 並執行
---
+
 -- 默認管理員賬號：
 -- 用戶名: admin
 -- 密碼: admin123
